@@ -23,6 +23,8 @@ module.exports = {
 
     devtool: 'cheap-module-source-map',
 
+    watch: true,
+
     module: {
         loaders: [{
                 test: /\.tsx?$/,
