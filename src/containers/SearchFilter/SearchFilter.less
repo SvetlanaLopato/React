@@ -1,0 +1,27 @@
+@import '../../styles/variables.less';
+
+.search-filter {
+    font-size: 12px;
+}
+
+.search-filter-option {
+    display: inline-block;
+    height: 25px;
+    line-height: 25px;
+    font-size: 12px;
+    background: @grey;
+    border-radius: 3px;
+    padding: 0 15px;
+    margin-left: 10px;
+    cursor: pointer;
+
+    &:hover {
+        background: @red;
+    }
+}
+
+.search-filter-option-active {
+    .search-filter-option;
+
+    background: @red;
+}

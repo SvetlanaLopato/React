@@ -1,0 +1,47 @@
+@import '../../styles/variables.less';
+
+.search-panel {
+    text-transform: uppercase;
+
+    .wrapper {
+        display: flex;
+        flex-direction: column;
+    }
+
+    label {
+        padding: 40px 0 20px;
+    }
+}
+
+.search-options {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 25px 0 40px;
+}
+
+.search-field {
+    height: 50px;
+    background: @black;
+    border-bottom: 2px solid @red;
+    padding: 0 20px;
+    display: flex;
+
+    input {
+        border: none;
+        outline: none;
+        height: 100%;
+        background: @black;
+        color: @white;
+        font-size: 15px;
+        flex-grow: 1;
+    }
+
+    i {
+        transform: rotate(180deg);
+        line-height: 50px;
+        margin-left: 20px;
+        font-size: 12px;
+        color: @greyLight;
+    }
+}

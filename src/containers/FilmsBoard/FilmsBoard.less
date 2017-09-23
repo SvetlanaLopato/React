@@ -1,0 +1,27 @@
+@import '../../styles/variables.less';
+
+.films-board {
+    padding: 50px 0;
+    display: flex;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+}
+
+.films-board-title {
+    background: @greyLighter;
+    height: 40px;
+    line-height: 40px;
+    font-weight: bold;
+
+    div:not(.wrapper) {
+        display: flex;
+        justify-content: space-between;
+    }
+}
+
+.films-board-empty {
+    color: @greyLight;
+    text-align: center;
+    font-size: 50px;
+    padding: 100px;
+}
