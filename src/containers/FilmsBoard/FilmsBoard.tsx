@@ -30,13 +30,6 @@ function renderFilmsBoard() {
     return  (
         <div className="films-board wrapper">
             <FilmCard />
-            <FilmCard />
-            <FilmCard />
-            <FilmCard />
-            <FilmCard />
-            <FilmCard />
-            <FilmCard />
-            <FilmCard />
         </div>
     );
 }
@@ -49,8 +42,8 @@ function renderEmptyBoard() {
 
 function renderBoardTitle(children: React.ReactNode) {
     const boardTitle = children
-        ? <div>7 movies found {children}</div>
-        : <div>Films by Mr. White</div>
+        ? <div>movies found {children}</div>
+        : <div>Films by</div>
 
     return (
         <div className="wrapper">

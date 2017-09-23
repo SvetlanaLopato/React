@@ -7,7 +7,7 @@ import './App.less';
 const App = () => (
     <div className="app">
         <div className="main">
-            <FilmPage />
+            <SearchPage />
         </div>
         <footer className="footer">
             <div className="wrapper logo">
@@ -15,7 +15,5 @@ const App = () => (
         </footer>
     </div>
 );
-// <FilmPage />
-// <SearchPage />
 
 export default App;
