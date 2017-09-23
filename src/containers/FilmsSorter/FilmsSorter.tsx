@@ -1,6 +1,6 @@
-import './FilmsSorter.less';
-
 import React from 'react';
+
+import './FilmsSorter.less';
 
 export default class FilmsSorter extends React.Component {
     render() {

@@ -1,6 +1,6 @@
-import './BackToSearchButton.less';
-
 import React from 'react';
+
+import './BackToSearchButton.less';
 
 export default class BackToSearchButton extends React.Component {
     render() {

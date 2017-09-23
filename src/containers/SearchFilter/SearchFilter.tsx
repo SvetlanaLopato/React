@@ -1,6 +1,6 @@
-import './SearchFilter.less';
-
 import React from 'react';
+
+import './SearchFilter.less';
 
 export default class SearchFilter extends React.Component {
     render() {

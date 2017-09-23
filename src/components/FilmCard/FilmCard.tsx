@@ -1,6 +1,6 @@
-import './FilmCard.less';
-
 import React from 'react';
+
+import './FilmCard.less';
 
 export default class FilmCard extends React.Component {
     render() {

@@ -1,7 +1,7 @@
-import './SearchPanel.less'
-
 import React from 'react';
 import SearchFilter from 'containers/SearchFilter/SearchFilter';
+
+import './SearchPanel.less'
 
 const SearchPanel = () => (
     <div className="search-panel header-panel">

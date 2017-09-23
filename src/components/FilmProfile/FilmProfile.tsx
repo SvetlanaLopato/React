@@ -1,6 +1,6 @@
-import './FilmProfile.less';
-
 import React from 'react';
+
+import './FilmProfile.less';
 
 const FilmProfile = () => (
     <div className="header-panel">
