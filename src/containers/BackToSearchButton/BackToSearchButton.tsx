@@ -1,12 +1,16 @@
 import React from 'react';
+import { withRouter } from 'react-router';
 import './BackToSearchButton.less';
-import historyProvider from 'helper/historyProvider';
 
-export default class BackToSearchButton extends React.Component {
+interface BackToSearchButtonProps {
+    history: any;
+}
+
+class BackToSearchButtonContainer extends React.Component<BackToSearchButtonProps, {}> {
     private onBackToSearchButtonClick = (): void => {
         const defaultSearchUrl = '/search';
 
-        historyProvider.navigateTo(defaultSearchUrl);
+        this.props.history.push(defaultSearchUrl);
     }
 
     render() {
@@ -19,3 +23,7 @@ export default class BackToSearchButton extends React.Component {
         );
     }
 }
+
+const BackToSearchButton = withRouter(BackToSearchButtonContainer);
+
+export default BackToSearchButton;

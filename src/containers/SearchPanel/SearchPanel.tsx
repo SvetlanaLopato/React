@@ -1,24 +1,25 @@
 import React from 'react';
 import SearchFilter from 'containers/SearchFilter/SearchFilter';
-import historyProvider from 'helper/historyProvider';
+import { withRouter } from 'react-router';
 import './SearchPanel.less';
 
 interface SearchPanelProps {
-    searchQuery: string;
+    match: any;
+    history: any;
 }
 
 interface KeyPressEvent {
     charCode: number;
 }
 
-export default class SearchPanel extends React.Component<SearchPanelProps, {}> {
+class SearchPanelContainer extends React.Component<SearchPanelProps, {}> {
     private input: HTMLInputElement;
 
     private onSearch = (): void => {
         const newSearchQuery = this.input.value;
-        const currentSearchQuery = this.props.searchQuery;
+        const currentSearchQuery = this.props.match.params.searchQuery;
 
-        newSearchQuery !== currentSearchQuery && historyProvider.navigateTo(`/search/${newSearchQuery}`);
+        newSearchQuery !== currentSearchQuery && this.props.history.push(`/search/${newSearchQuery}`);
     }
 
     private onKeyPress = ({ charCode }: KeyPressEvent): void => {
@@ -28,7 +29,7 @@ export default class SearchPanel extends React.Component<SearchPanelProps, {}> {
     }
 
     componentWillUpdate(nextProps: SearchPanelProps) {
-        this.input.value = nextProps.searchQuery || '';
+        this.input.value = nextProps.match.params.searchQuery || '';
     }
 
     render() {
@@ -38,7 +39,7 @@ export default class SearchPanel extends React.Component<SearchPanelProps, {}> {
                     <label>Find your movie</label>
                     <div className="search-field">
                         <input type="text"
-                            defaultValue={this.props.searchQuery}
+                            defaultValue={this.props.match.params.searchQuery}
                             ref={input => this.input = input}
                             onKeyPress={this.onKeyPress}
                         />
@@ -53,3 +54,7 @@ export default class SearchPanel extends React.Component<SearchPanelProps, {}> {
         );
     }
 }
+
+const SearchPanel = withRouter(SearchPanelContainer);
+
+export default SearchPanel;

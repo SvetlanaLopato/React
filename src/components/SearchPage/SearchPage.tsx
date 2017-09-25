@@ -5,7 +5,7 @@ import FilmsSorter from 'containers/FilmsSorter/FilmsSorter';
 
 const SearchPage = (props) => (
     <div>
-        <SearchPanel searchQuery={props.match.params.searchQuery} />
+        <SearchPanel />
         <FilmsBoard>
             <FilmsSorter />
         </FilmsBoard>

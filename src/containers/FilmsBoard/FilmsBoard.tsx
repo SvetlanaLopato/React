@@ -1,17 +1,18 @@
 import React from 'react';
 import FilmCard from 'components/FilmCard/FilmCard';
-import historyProvider from 'helper/historyProvider';
+import { withRouter } from 'react-router';
 import './FilmsBoard.less';
 
-interface Props {
-  children?: React.ReactNode;
-};
+interface FilmsBoardContainerProps {
+    children?: React.ReactNode;
+    history: any;
+}
 
-export default class FilmsBoard extends React.Component<Props, object> {
+class FilmsBoardContainer extends React.Component<FilmsBoardContainerProps, object> {
     private onFilmCardClick = (): void => {
         const filmTitle = 'Film title';
 
-        historyProvider.navigateTo(`/film/${filmTitle}`)
+        this.props.history.push(`/film/${filmTitle}`)
     }
 
     render() {
@@ -57,3 +58,7 @@ function renderBoardTitle(children: React.ReactNode) {
         </div>
     );
 }
+
+const FilmsBoard = withRouter(FilmsBoardContainer);
+
+export default FilmsBoard;
