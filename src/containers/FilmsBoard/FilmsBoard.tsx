@@ -1,19 +1,26 @@
 import React from 'react';
 import FilmCard from 'components/FilmCard/FilmCard';
-
+import { withRouter } from 'react-router';
 import './FilmsBoard.less';
 
-interface Props {
-  children?: React.ReactNode;
-};
+interface FilmsBoardContainerProps {
+    children?: React.ReactNode;
+    history: any;
+}
 
-export default class FilmsBoard extends React.Component<Props, object> {
+class FilmsBoardContainer extends React.Component<FilmsBoardContainerProps, object> {
+    private onFilmCardClick = (): void => {
+        const filmTitle = 'Film title';
+
+        this.props.history.push(`/film/${filmTitle}`)
+    }
+
     render() {
         const filmsListEmpty = false;
         const boardTitle = !filmsListEmpty && renderBoardTitle(this.props.children)
         const filmsBoard = filmsListEmpty
             ? renderEmptyBoard()
-            : renderFilmsBoard();
+            : renderFilmsBoard.call(this);
 
         return (
             <div>
@@ -29,7 +36,7 @@ export default class FilmsBoard extends React.Component<Props, object> {
 function renderFilmsBoard() {
     return  (
         <div className="films-board wrapper">
-            <FilmCard />
+            <div onClick={this.onFilmCardClick}><FilmCard /></div>
         </div>
     );
 }
@@ -51,3 +58,7 @@ function renderBoardTitle(children: React.ReactNode) {
         </div>
     );
 }
+
+const FilmsBoard = withRouter(FilmsBoardContainer);
+
+export default FilmsBoard;

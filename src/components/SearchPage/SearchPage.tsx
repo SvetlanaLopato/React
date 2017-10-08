@@ -1,5 +1,5 @@
 import React from 'react';
-import SearchPanel from 'containers/SearchPanel/SearchPanel';
+import SearchPanel from 'components/SearchPanel/SearchPanel';
 import FilmsBoard from 'containers/FilmsBoard/FilmsBoard';
 import FilmsSorter from 'containers/FilmsSorter/FilmsSorter';
 

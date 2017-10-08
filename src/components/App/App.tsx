@@ -1,17 +1,15 @@
 import React from 'react';
-import SearchPage from 'components/SearchPage/SearchPage';
-import FilmPage from 'components/FilmPage/FilmPage';
+import AppRouter from 'components/AppRouter/AppRouter';
 
 import './App.less';
 
 const App = () => (
     <div className="app">
         <div className="main">
-            <SearchPage />
+            <AppRouter />
         </div>
         <footer className="footer">
-            <div className="wrapper logo">
-            </div>
+            <div className="wrapper logo"></div>
         </footer>
     </div>
 );
