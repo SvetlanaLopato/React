@@ -1,15 +1,21 @@
 import React from 'react';
+import { connect } from 'react-redux';
+
 import { withRouter } from 'react-router';
+import { setSearchQuery } from 'actions';
 
 interface SearchButtonProps {
     history: any;
+    inputValue: string;
+    dispatch: any;
 }
 
 class SearchButtonContainer extends React.Component<SearchButtonProps, {}> {
     private onSearch = (): void => {
-        const newSearchQuery = 'get from store';
+        const searchQuery: string = this.props.inputValue;
 
-        this.props.history.push(`/search/${newSearchQuery}`);
+        this.props.dispatch(setSearchQuery(searchQuery, true));
+        this.props.history.push(`/search/${searchQuery}`);
     }
 
     render() {
@@ -21,4 +27,7 @@ class SearchButtonContainer extends React.Component<SearchButtonProps, {}> {
 
 const SearchButton = withRouter(SearchButtonContainer);
 
-export default SearchButton;
+const mapStateToProps = ({ search }) => ({ inputValue: search.inputValue });
+const mapDispatchToProps = (dispatch) => ({ dispatch: (action) => dispatch(action) });
+
+export default connect(mapStateToProps, mapDispatchToProps)(SearchButton);

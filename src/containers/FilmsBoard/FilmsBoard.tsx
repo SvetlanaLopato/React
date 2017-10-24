@@ -1,26 +1,32 @@
 import React from 'react';
-import FilmCard from 'components/FilmCard/FilmCard';
+import { connect } from 'react-redux';
 import { withRouter } from 'react-router';
+
+import FilmCard from 'components/FilmCard/FilmCard';
+import { fetchFilmById } from 'actions';
+
 import './FilmsBoard.less';
 
 interface FilmsBoardContainerProps {
-    children?: React.ReactNode;
     history: any;
+    children?: React.ReactNode;
+    filmsList: any;
+    dispatch: any;
 }
 
 class FilmsBoardContainer extends React.Component<FilmsBoardContainerProps, object> {
-    private onFilmCardClick = (): void => {
-        const filmTitle = 'Film title';
-
-        this.props.history.push(`/film/${filmTitle}`)
+    private onFilmCardClick = ({ id, title }): void => {
+        this.props.history.push(`/film/${title}`);
+        this.props.dispatch(fetchFilmById(id));
     }
 
     render() {
-        const filmsListEmpty = false;
-        const boardTitle = !filmsListEmpty && renderBoardTitle(this.props.children)
-        const filmsBoard = filmsListEmpty
-            ? renderEmptyBoard()
-            : renderFilmsBoard.call(this);
+        const { filmsList, children } = this.props;
+        const filmsListEmpty: boolean = !filmsList || !filmsList.length;
+        const boardTitle = !filmsListEmpty && renderBoardTitle(children, filmsList.length)
+        const filmsBoard = !filmsListEmpty
+            ? renderFilmsBoard.call(this, filmsList)
+            : renderEmptyBoard();
 
         return (
             <div>
@@ -33,24 +39,30 @@ class FilmsBoardContainer extends React.Component<FilmsBoardContainerProps, obje
     }
 }
 
-function renderFilmsBoard() {
+function renderFilmsBoard(filmsList) {
+    const FilmCardList = filmsList.map(film => {
+        return (
+            <div key={film.id} onClick={this.onFilmCardClick.bind(null, film)}>
+                <FilmCard film={film}/>
+            </div>
+        );
+    });
+
     return  (
         <div className="films-board wrapper">
-            <div onClick={this.onFilmCardClick}><FilmCard /></div>
+            {FilmCardList}
         </div>
     );
 }
 
 function renderEmptyBoard() {
-    return (
-        <div className="films-board-empty">No films found</div>
-    );
+    return <div className="films-board-empty">No films found</div>;
 }
 
-function renderBoardTitle(children: React.ReactNode) {
+function renderBoardTitle(children, filmsListLength: number) {
     const boardTitle = children
-        ? <div>movies found {children}</div>
-        : <div>Films by</div>
+        ? <div>{filmsListLength} movies found {children}</div>
+        : <div>Similar films</div>
 
     return (
         <div className="wrapper">
@@ -61,4 +73,7 @@ function renderBoardTitle(children: React.ReactNode) {
 
 const FilmsBoard = withRouter(FilmsBoardContainer);
 
-export default FilmsBoard;
+const mapStateToProps = ({ filmsList }) => ({ filmsList });
+const mapDispatchToProps = (dispatch) => ({ dispatch: (action) => dispatch(action) });
+
+export default connect(mapStateToProps, mapDispatchToProps)(FilmsBoard);

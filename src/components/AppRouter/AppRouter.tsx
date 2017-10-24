@@ -2,7 +2,7 @@ import React from 'react';
 import { Route, Switch, Redirect } from 'react-router';
 import { BrowserRouter } from 'react-router-dom'
 import SearchPage from 'components/SearchPage/SearchPage';
-import FilmPage from 'components/FilmPage/FilmPage';
+import FilmPage from 'containers/FilmPage/FilmPage';
 
 const AppRouter = () => (
     <BrowserRouter>
