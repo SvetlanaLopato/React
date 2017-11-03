@@ -1,123 +1,65 @@
+import fetchService from 'fetchService';
+
 import { updateFilmProfile, showFilmsBoard } from 'actions';
 
+const { getUrl, fetchData } = fetchService();
+
 export const fetchFilmsByTitle = (filmTitle: string) => {
-    return dispatch => {
-        const url: string = getUrl('searchByTitle', { filmTitle });
+    return async dispatch => {
+        const { data } = await getData('searchByTitle', { filmTitle });
 
-        fetchData(url, dispatchData);
-
-        function dispatchData(data) {
-            dispatch(showFilmsBoard(data.results));
-        }
+        dispatch(showFilmsBoard(data.results));
     }
 }
 
 export const fetchFilmsByActor = (actor: string) => {
-    return dispatch => {
-        const url: string = getUrl('searchByActor', { actor });
+    return async dispatch => {
+        const { data } = await getData('searchByActor', { actor });
+        const filmsByActor = getActorsFilms(data.results)
 
-        fetchData(url, dispatchData);
-
-        function dispatchData(data) {
-            const filmsByActor = getActorsFilms(data.results);
-            const uniqueFilmsByActor = getUniqueItems(filmsByActor);
-
-            dispatch(showFilmsBoard(uniqueFilmsByActor));
-        }
+        dispatch(showFilmsBoard(filmsByActor));
     }
 }
 
 export const fetchFilmById = (filmId: string) => {
-    return dispatch => {
-        const url: string = getUrl('movieById', { filmId });
+    return async dispatch => {
+        const { data } = await getData('movieById', { filmId });
 
-        fetchData(url, dispatchData);
-
-        function dispatchData(data) {
-            dispatch(updateFilmProfile(data));
-        }
+        dispatch(updateFilmProfile(data));
     }
 }
 
 export const fetchFilmByTitle = (filmTitle: string) => {
-    return dispatch => {
-        const url: string = getUrl('searchByTitle', { filmTitle });
+    return async dispatch => {
+        const { data } = await getData('searchByTitle', { filmTitle });
+        const firstMatchedFilm = data.results[0];
 
-        fetchData(url, dispatchData);
-
-        function dispatchData(data) {
-            const firstMatchedFilm = data.results[0];
-
-            dispatch(updateFilmProfile(firstMatchedFilm));
-        }
+        dispatch(updateFilmProfile(firstMatchedFilm));
     }
 }
 
 export const fetchSimilarFilms = (filmId: string) => {
-    return dispatch => {
-        const url: string = getUrl('similarMovies', { filmId });
+    return async dispatch => {
+        const { data } = await getData('similarMovies', { filmId });
 
-        fetchData(url, dispatchData);
-
-        function dispatchData(data) {
-            dispatch(showFilmsBoard(data.results));
-        }
+        dispatch(showFilmsBoard(data.results));
     }
+}
+
+function getData(searchType: string, options) {
+    const url: string = getUrl(searchType, options);
+
+    return fetchData(url);
 }
 
 function getActorsFilms(actors) {
-    return actors.reduce((films, actor) => films.concat(actor.known_for), []);
-}
+    const films = actors.reduce((films, actor) => films.concat(actor.known_for), []);
+    let itemsMap = {};
 
-function getUniqueItems(arr) {
-    let uniqueArr = [];
-
-    arr.forEach(element => {
-        !uniqueArr.find(uniqueElement => uniqueElement.id === element.id) && uniqueArr.push(element);
+    return films.filter(film => {
+        if (!itemsMap[film.id]) {
+            itemsMap[film.id] = true;
+            return true;
+        }
     });
-
-    return uniqueArr;
-}
-
-function fetchData(url: string, callback: (data) => void) {
-    const xhr = new XMLHttpRequest();
-
-    xhr.open('GET', url, true);
-
-    xhr.onload = () => {
-        const data = JSON.parse(xhr.responseText);
-
-        callback(data);
-    }
-
-    xhr.onerror = () => {
-      alert('Ошибка ' + this.status);
-    }
-
-    xhr.send();
-}
-
-function getUrl(type: string, options) {
-    const api_key: string = '72f487f6dcad6facef965420501d8275';
-    let params: string = `?api_key=${api_key}`;
-    let path: string = `https://api.themoviedb.org/3`;
-
-    switch (type) {
-        case 'movieById':
-            path += `/movie/${options.filmId}`;
-            break;
-        case 'searchByTitle':
-            path += '/search/movie';
-            params += `&query=${options.filmTitle}`;
-            break;
-        case 'searchByActor':
-            path += '/search/person';
-            params += `&query=${options.actor}`;
-            break;
-        case 'similarMovies':
-            path += `/movie/${options.filmId}/similar`;
-            break;
-    }
-
-    return path.concat(params);
 }
