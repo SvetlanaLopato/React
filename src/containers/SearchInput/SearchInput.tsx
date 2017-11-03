@@ -23,12 +23,6 @@ interface SearchInputContainerProps {
 class SearchInputContainer extends React.Component<SearchInputContainerProps, {}> {
     private input: HTMLInputElement;
 
-    componentWillMount() {
-        const currentSearchQuery: string = this.props.match.params.searchQuery;
-
-        this.props.dispatch(setSearchQuery(currentSearchQuery || '', true));
-    }
-
     componentWillUpdate(nextProps: SearchInputContainerProps) {
         if (nextProps.needSearch) {
             this.synchronizeInput(this.input, nextProps);
@@ -47,6 +41,12 @@ class SearchInputContainer extends React.Component<SearchInputContainerProps, {}
                 <i className="fa fa-share"></i>
             </div>
         );
+    }
+
+    componentDidMount() {
+        const currentSearchQuery: string = this.props.match.params.searchQuery;
+
+        this.props.dispatch(setSearchQuery(currentSearchQuery || '', true));
     }
 
     private synchronizeInput(input: InputI, { searchQuery, dispatch }: SearchInputContainerProps): void {
