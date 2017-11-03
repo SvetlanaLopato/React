@@ -46,6 +46,5 @@ class FilmPageContainer extends React.Component<FilmPageProps, {}> {
 const FilmPage = withRouter(FilmPageContainer);
 
 const mapStateToProps = ({ film }) => ({ filmInfo: film.filmInfo });
-const mapDispatchToProps = (dispatch) => ({ dispatch: (action) => dispatch(action) });
 
-export default connect(mapStateToProps, mapDispatchToProps)(FilmPage);
+export default connect(mapStateToProps)(FilmPage);

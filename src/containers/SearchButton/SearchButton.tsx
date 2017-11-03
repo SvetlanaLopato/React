@@ -28,6 +28,5 @@ class SearchButtonContainer extends React.Component<SearchButtonProps, {}> {
 const SearchButton = withRouter(SearchButtonContainer);
 
 const mapStateToProps = ({ search }) => ({ inputValue: search.inputValue });
-const mapDispatchToProps = (dispatch) => ({ dispatch: (action) => dispatch(action) });
 
-export default connect(mapStateToProps, mapDispatchToProps)(SearchButton);
+export default connect(mapStateToProps)(SearchButton);

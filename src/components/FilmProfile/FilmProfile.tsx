@@ -34,7 +34,7 @@ function getFilmDescription({ film }: FilmProfileProps) {
     const genres: string = convertToString(film.genres);
     const companies: string = convertToString(film.production_companies);
     const imgPath: string = getImgPath(film.poster_path);
-    const releaseYear: number = parseInt(film.release_date);
+    const releaseYear: string = film.release_date.substr(0, 4);
 
     return (
         <div className="film-profile">

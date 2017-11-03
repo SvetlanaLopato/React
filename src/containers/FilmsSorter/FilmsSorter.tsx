@@ -17,8 +17,8 @@ class FilmsSorter extends React.Component<FilmsSorterProps, FilmsSorterState> {
     private sortByReleaseDate: string = 'release date';
     private sortByRating: string = 'rating';
 
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
         this.state = { sortBy: this.sortByReleaseDate };
     }
 
@@ -55,6 +55,4 @@ class FilmsSorter extends React.Component<FilmsSorterProps, FilmsSorterState> {
     }
 }
 
-const mapDispatchToProps = (dispatch) => ({ dispatch: (action) => dispatch(action) });
-
-export default connect(null, mapDispatchToProps)(FilmsSorter);
+export default connect()(FilmsSorter);

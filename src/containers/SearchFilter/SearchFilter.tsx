@@ -17,8 +17,8 @@ class SearchFilter extends React.Component<SearchFilterProps, SearchFilterState>
     private searchByTitle = 'title';
     private searchByActor = 'actor';
 
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
         this.state = { searchBy: this.searchByTitle };
     }
 
@@ -56,6 +56,4 @@ class SearchFilter extends React.Component<SearchFilterProps, SearchFilterState>
     }
 }
 
-const mapDispatchToProps = (dispatch) => ({ dispatch: (action) => dispatch(action) });
-
-export default connect(null, mapDispatchToProps)(SearchFilter);
+export default connect()(SearchFilter);

@@ -98,6 +98,5 @@ const mapStateToProps = ({ search }) => ({
     searchQuery: search.searchQuery,
     needSearch: search.needSearch,
 });
-const mapDispatchToProps = (dispatch) => ({ dispatch: (action) => dispatch(action) });
 
-export default connect(mapStateToProps, mapDispatchToProps)(SearchInput);
+export default connect(mapStateToProps)(SearchInput);
