@@ -1,5 +1,6 @@
 import React from 'react';
 import { withRouter } from 'react-router';
+
 import './BackToSearchButton.less';
 
 interface BackToSearchButtonProps {
@@ -8,7 +9,7 @@ interface BackToSearchButtonProps {
 
 class BackToSearchButtonContainer extends React.Component<BackToSearchButtonProps, {}> {
     private onBackToSearchButtonClick = (): void => {
-        const defaultSearchUrl = '/search';
+        const defaultSearchUrl: string = '/search';
 
         this.props.history.push(defaultSearchUrl);
     }

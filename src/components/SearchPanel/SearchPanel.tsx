@@ -1,4 +1,5 @@
 import React from 'react';
+
 import SearchFilter from 'containers/SearchFilter/SearchFilter';
 import SearchButton from 'containers/SearchButton/SearchButton';
 import SearchInput from 'containers/SearchInput/SearchInput';
