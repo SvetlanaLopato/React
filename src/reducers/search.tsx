@@ -1,6 +1,8 @@
 import * as actions from 'actions';
 
-const search = (state = {}, action) => {
+import { SearchAction, SearchState } from 'types';
+
+const search = (state: SearchState = {}, action: SearchAction): SearchState => {
     switch (action.type) {
         case actions.SET_SEARCH_OPTION:
             return { ...state, searchBy: action.searchBy, needSearch: action.needSearch };

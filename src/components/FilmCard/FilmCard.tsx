@@ -1,14 +1,11 @@
 import React from 'react';
 
+import { FilmCardI } from 'types';
+
 import './FilmCard.less';
 
 interface FilmCardProps {
-    film: {
-        poster_path: string;
-        title: string;
-        release_date: string;
-        vote_count: number;
-    };
+    film: FilmCardI;
 }
 
 const FilmCard = ({ film }: FilmCardProps) => {

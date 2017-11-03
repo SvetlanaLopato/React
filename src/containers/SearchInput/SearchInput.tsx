@@ -2,6 +2,7 @@ import React from 'react';
 import { withRouter } from 'react-router';
 import { connect } from 'react-redux';
 
+import { InputI, KeyPressEvent } from 'types';
 import {
     fetchFilmsByTitle,
     fetchFilmsByActor,
@@ -9,10 +10,6 @@ import {
     setInputValue,
     resetFilmsList
 } from 'actions';
-
-interface KeyPressEvent {
-    charCode: number;
-}
 
 interface SearchInputContainerProps {
     match: any;
@@ -52,7 +49,7 @@ class SearchInputContainer extends React.Component<SearchInputContainerProps, {}
         );
     }
 
-    private synchronizeInput(input, { searchQuery, dispatch }): void {
+    private synchronizeInput(input: InputI, { searchQuery, dispatch }: SearchInputContainerProps): void {
         input.value = input.value || searchQuery;
         dispatch(setInputValue(searchQuery));
     }

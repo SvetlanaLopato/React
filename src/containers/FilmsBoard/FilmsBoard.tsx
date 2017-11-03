@@ -4,6 +4,7 @@ import { withRouter } from 'react-router';
 
 import FilmCard from 'components/FilmCard/FilmCard';
 import { fetchFilmById } from 'actions';
+import { FilmCardI } from 'types';
 
 import './FilmsBoard.less';
 
@@ -33,12 +34,12 @@ class FilmsBoardContainer extends React.Component<FilmsBoardContainerProps, obje
         );
     }
 
-    private onFilmCardClick = ({ id, title }): void => {
+    private onFilmCardClick = ({ id, title }: FilmCardI): void => {
         this.props.history.push(`/film/${title}`);
         this.props.dispatch(fetchFilmById(id));
     }
 
-    private renderFilmsBoard = (filmsList) => {
+    private renderFilmsBoard = (filmsList: FilmCardI[]) => {
         const FilmCardList = filmsList.map(film => {
             return (
                 <div key={film.id} onClick={this.onFilmCardClick.bind(null, film)}>

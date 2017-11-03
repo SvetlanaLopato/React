@@ -22,8 +22,8 @@ class FilmPageContainer extends React.Component<FilmPageProps, {}> {
     }
 
     componentWillUpdate(newProps) {
-        const currentFilmInfoId = this.props.filmInfo && this.props.filmInfo.id;
-        const newFilmInfoId = newProps.filmInfo && newProps.filmInfo.id;
+        const currentFilmInfoId: string = this.props.filmInfo && this.props.filmInfo.id;
+        const newFilmInfoId: string = newProps.filmInfo && newProps.filmInfo.id;
 
         if (currentFilmInfoId !== newFilmInfoId) {
             newProps.dispatch(fetchSimilarFilms(newFilmInfoId));

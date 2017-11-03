@@ -50,7 +50,7 @@ class FilmsSorter extends React.Component<FilmsSorterProps, FilmsSorterState> {
         return sortBy === this.state.sortBy ? activeClassName : '';
     }
 
-    private setSortBy = (sortBy): void => {
+    private setSortBy = (sortBy: string): void => {
         this.state.sortBy !== sortBy && this.setState({ sortBy });
     }
 }

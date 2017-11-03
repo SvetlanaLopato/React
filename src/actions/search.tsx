@@ -1,8 +1,10 @@
+import { SearchAction } from 'types';
+
 export const SET_SEARCH_OPTION = 'SET_SEARCH_OPTION';
 export const SET_SEARCH_QUERY = 'SET_SEARCH_QUERY';
 export const SET_INPUT_VALUE = 'SET_INPUT_VALUE';
 
-export const setSearchOption = (searchBy, needSearch: boolean = true) => {
+export const setSearchOption = (searchBy: string, needSearch: boolean = true): SearchAction => {
     return {
         type: SET_SEARCH_OPTION,
         searchBy,
@@ -10,7 +12,7 @@ export const setSearchOption = (searchBy, needSearch: boolean = true) => {
     }
 }
 
-export const setSearchQuery = (searchQuery, needSearch: boolean) => {
+export const setSearchQuery = (searchQuery: string, needSearch: boolean): SearchAction => {
     return {
         type: SET_SEARCH_QUERY,
         searchQuery,
@@ -18,7 +20,7 @@ export const setSearchQuery = (searchQuery, needSearch: boolean) => {
     }
 }
 
-export const setInputValue = inputValue => {
+export const setInputValue = (inputValue: string): SearchAction => {
     return {
         type: SET_INPUT_VALUE,
         inputValue,

@@ -1,6 +1,7 @@
 import fetchService from 'fetchService';
 
 import { updateFilmProfile, showFilmsBoard } from 'actions';
+import { FetchOptions, FilmCardI } from 'types';
 
 const { getUrl, fetchData } = fetchService();
 
@@ -21,7 +22,7 @@ export const fetchFilmsByActor = (actor: string) => {
     }
 }
 
-export const fetchFilmById = (filmId: string) => {
+export const fetchFilmById = (filmId: number) => {
     return async dispatch => {
         const { data } = await getData('movieById', { filmId });
 
@@ -46,14 +47,14 @@ export const fetchSimilarFilms = (filmId: string) => {
     }
 }
 
-function getData(searchType: string, options) {
+function getData(searchType: string, options: FetchOptions) {
     const url: string = getUrl(searchType, options);
 
     return fetchData(url);
 }
 
-function getActorsFilms(actors) {
-    const films = actors.reduce((films, actor) => films.concat(actor.known_for), []);
+function getActorsFilms(actors: any): FilmCardI[] {
+    const films: FilmCardI[] = actors.reduce((films, actor) => films.concat(actor.known_for), []);
     let itemsMap = {};
 
     return films.filter(film => {

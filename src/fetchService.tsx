@@ -1,5 +1,7 @@
 import axios from 'axios';
 
+import { FetchOptions } from 'types';
+
 export default function fetchService() {
     return {
         fetchData,
@@ -10,7 +12,7 @@ export default function fetchService() {
         return axios({ method, url });
     }
 
-    function getUrl(type: string, options) {
+    function getUrl(type: string, options: FetchOptions): string {
         const api_key: string = '72f487f6dcad6facef965420501d8275';
         let params: string = `?api_key=${api_key}`;
         let path: string = `https://api.themoviedb.org/3`;

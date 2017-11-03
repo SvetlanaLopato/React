@@ -14,8 +14,8 @@ interface SearchFilterState {
 }
 
 class SearchFilter extends React.Component<SearchFilterProps, SearchFilterState> {
-    private searchByTitle = 'title';
-    private searchByActor = 'actor';
+    private searchByTitle: string = 'title';
+    private searchByActor: string = 'actor';
 
     constructor(props) {
         super(props);

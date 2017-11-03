@@ -1,19 +1,11 @@
 import React from 'react';
 
+import { FilmInfo } from 'types';
+
 import './FilmProfile.less';
 
 interface FilmProfileProps {
-    film: {
-        poster_path: string;
-        title: string;
-        vote_average: number;
-        genres: any;
-        release_date: string;
-        runtime: string;
-        overview: string;
-        production_companies: any;
-        original_language: string;
-    };
+    film: FilmInfo;
 }
 
 const FilmProfile = ({ film }: FilmProfileProps) => {
